@@ -15,8 +15,8 @@
 }
 
 #board {
-    width: 540px;
-    height: 540px;
+    width: 1200px;
+    height: 600px;
     /* background-color: green; */
 
     margin: 0 auto;
@@ -75,7 +75,7 @@ window.onload = function() {
 
 function setGame() {
     //set up the grid in html
-    for (let i = 0; i < 9; i++) { //i goes from 0 to 8, stops at 9
+    for (let i = 0; i < 21; i++) { //i goes from 0 to 8, stops at 9
         //<div id="0-8"></div>
         let tile = document.createElement("div");
         tile.id = i.toString();
