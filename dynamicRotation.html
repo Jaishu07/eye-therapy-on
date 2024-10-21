@@ -46,7 +46,7 @@
       justify-content: center;
       background-color: blueviolet;
       height: 100px;
-      width: 40vw;
+      width: 600px;
       border-radius: 20px;
       margin-bottom: 40px;
       margin-top: 20px;
@@ -66,7 +66,7 @@
       background: #ccc;
     }
 
-    
+    /* Slider thumb */
     .slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
@@ -83,6 +83,7 @@
       background: #ff6347;
     }
 
+    /* For other browsers (Firefox) */
     .slider::-moz-range-thumb {
       width: 20px;
       height: 20px;
@@ -102,6 +103,23 @@
       height: 8px;
       border-radius: 5px;
     }
+    button {
+   background-color: #ff4500;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease-in-out;
+  margin-left: 10px;
+}
+
+button:hover {
+  background-color: #ff6347;
+}
+
   </style>
 </head>
 <body>
@@ -112,7 +130,8 @@
 
   <div class="control-panel">
     <label for="speedControl">Speed: </label>
-    <input type="range" id="speedControl" class="slider" min="0.01" max="1" value="0.1" step="0.01">
+    <input type="range" id="speedControl" class="slider" min="0.5" max="2" value="0.1" step="0.01">
+    <button class="button" onclick="startAnimation()">Start Again</button>
   </div>
 
   <script>
@@ -122,7 +141,7 @@
     let radius = 10;
     const maxRadius = 50;
     let speed = 0.10; 
-
+    let animationFrameId;
     function moveDot() {
       radius += 0.2;
       angle += speed; 
@@ -134,17 +153,23 @@
       if (radius <= 0) {
               radius = maxRadius;
       }
-
-      requestAnimationFrame(moveDot);
+      animationFrameId = requestAnimationFrame(moveDot);
+      // timeoutId = setTimeout(animateStep, speed);
     }
 
    
     speedControl.addEventListener('input', function() {
       speed = parseFloat(this.value);
     });
+    
+    function startAnimation() {
+      cancelAnimationFrame(animationFrameId); 
+      angle = 0; 
+      radius = 10; 
+      moveDot(); 
+    }
 
     moveDot();
   </script>
 </body>
 </html>
-
